@@ -1,5 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+:root{
+    --font-sans: "Raleway", "Segoe UI", Roboto, "Helvetica Neue", Arial,
+                 "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji",
+                 sans-serif;
+}
+  
+  
+html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    line-height: 1.5;
+    font-weight: 400; 
+}
+  
+h1,h2,h3 { 
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+h4,h5,h6 {
+    font-weight: 600;
+}
+  
+.navbar, .btn, .video-controls button, .link-pill { 
+    font-weight: 600; 
+}
+small, .note {
+    font-weight: 400; 
+}
+  
+
+button, input, select, textarea { font-family: inherit; }
+
 
 /* Scroll functionality */
 html {
@@ -179,3 +213,58 @@ body {
 #nextBtn:hover {
     background: #0b5f89;
 }
+
+/*Extra info Section */
+
+.lesson-notes{
+    max-width: 900px;
+    margin: 16px auto 28px;
+    padding: 16px;
+    border: 2px solid #000000;
+    border-radius: 30px;
+    background: #fff;
+}
+  
+.lesson-notes h3{ 
+    margin: 0 0 10px; 
+}
+.lesson-notes .notes-subtitle{ 
+    margin-top: 18px; 
+}
+  
+.note-block{
+    background: #f7f7f7;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 12px 14px;
+}
+.note-block .small{ 
+    font-size: .9rem; 
+    color: #666; 
+    margin-top: 8px; 
+}
+  
+.resource-list{
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+.resource-list li{ 
+    margin: 8px 0; 
+}
+  
+.link-pill{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    border: 1px solid #1f6b84;
+    border-radius: 999px;
+    padding: 8px 12px;
+    background: #cce1f3;
+}
+.link-pill:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 2px 0 #000000;
+}
+
