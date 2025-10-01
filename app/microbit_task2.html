@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Training Platform Robogals</title>
+    <link rel="stylesheet" href="../assets/css/style.css"/>
+    <link rel="icon" type="image/png" href="../assets/images/robogals-logo.png"/>
+    <script defer src="../assets/js/script.js"></script>
+</head>
+<body class="has-fixed-nav">
+    <!-- Navbar -->
+    <div id="navbar" data-navbar-src="../partials/navbar.html"></div>
+
+    <section class="training-video">
+        <h2>Robogals Microbit Task 2</h2>
+        <!-- Video input -->
+        <video
+            id="trainingVideo"
+            preload="metadata"
+            playsinline
+            disablepictureinpicture
+            oncontextmenu= "return false"
+            tabindex="0"
+        >
+            <source src="../assets/videos/test_file.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <!-- Video Controls -->
+        <div class="video-controls" aria-label="Video controls">
+            <button id="playPauseBtn" type="button" aria-label="Play"> Play</button>
+            <span id="timeLabel" aria-live="polite">00:00 / 00:00</span>
+        </div>
+        <!-- Next Button -->
+        <a id="nextBtn" class="btn" href="./microbit_task3.html" style="display:none;">
+            Next → Part 3
+        </a>
+
+        <p class="note">You must watch the full video. Skipping is disabled.</p>
+    </section>
+</body>
+</html>
