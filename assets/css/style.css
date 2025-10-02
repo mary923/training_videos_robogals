@@ -193,12 +193,14 @@ body {
     border: none;
     border-radius: 0;
     background: none;
+    justify-content: center;
 }
 .training-video video {
-    width: 1300px;
+    width: 1500px;
     border-radius: 8px;
     background: #000;
     pointer-events: auto;
+    margin: 0 auto;
 }
 .video-controls {
     display: flex;
@@ -272,8 +274,8 @@ body {
     display: inline-block;
     margin: 6px 0;
     padding: 8px 16px;
-    background: #adcff1;
-    color: #000 !important;
+    background: #4da2f6;
+    color: #ffffff !important;
     border-radius: 6px;
     font-weight: bold;
     text-decoration: none !important;
@@ -281,7 +283,7 @@ body {
 }
 .link-pill:hover{
     background: #5aa0e6;
-    color: #000 !important;
+    color: #ffffff !important;
     box-shadow: none;  
 }
 
@@ -303,4 +305,246 @@ body {
 .btn-back:hover {
     background: #5aa0e6;
     color: #000000 !important;
+}
+
+/* Quiz Colour Layout */
+:root {
+    --bg: #f5f9ff;
+    --card: #ffffff;
+    --muted: #4b5a70;
+    --text: #1a1a1a;
+
+    --blue-100: #e9f2fb;
+    --blue-200: #cfe3f7;
+    --blue-300: #a7cbef;
+    --blue-400: #85b1df; 
+    --blue-500: #61a6d7; 
+    --blue-600: #4c8ac1;
+    --blue-700: #366d9f;
+    --blue-800: #254a6e;
+
+    --green-500: #28c76f;
+    --red-500: #ff4d4f;
+    --yellow-500: #f2c94c;
+
+    --outline: 3px solid var(--blue-400);
+}
+
+/* Layout */
+body.has-fixed-nav .quiz-wrapper {
+    background: var(--bg);
+    max-width: 1000px;
+    margin: 40px auto 80px;
+    padding: 30px 16px;
+    font-family: "Raleway", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    color: var(--text);
+}
+
+.quiz-header h1 {
+    font-weight: 800;
+    letter-spacing: .2px;
+    margin: 0 0 6px;
+    color: #0f2f54;
+}
+.quiz-sub {
+    color: var(--muted);
+    margin: 0 0 16px;
+}
+
+/* Progress Bar */
+.quiz-progress {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    background: #dfeaf7;
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px #c9dbf1;
+}
+.quiz-progress__bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue-500), var(--blue-400));
+    transition: width .25s ease;
+}
+
+/* Grid */
+.quiz {
+    display: grid;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Card */
+.q-card {
+    background: var(--card);
+    border: 1px solid var(--blue-200);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 8px 24px rgba(133,177,223,.25);
+}
+
+/* Title and badge */
+.q-title {
+    font-weight: 700;
+    margin: 4px 0 14px;
+    color: var(--blue-800);
+}
+.q-badge {
+    display: inline-block;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-left: 8px;
+    color: #13466c;
+    background: var(--blue-200);
+    vertical-align: middle;
+}
+
+/* Choices */
+.choice-list {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.choice {
+    position: relative;
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    align-items: start;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--blue-200);
+    border-radius: 12px;
+    background: var(--blue-100);
+    color: var(--text);
+    cursor: pointer;
+    transition: transform .06s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.choice:hover {
+    border-color: var(--blue-400);
+    background: var(--blue-200);
+    box-shadow: 0 0 0 3px rgba(133,177,223,.35);
+}
+.choice:active { transform: scale(.997); }
+
+/* Input answers */
+.choice input {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px; height: 22px;
+    margin-top: 2px;
+    border-radius: 6px;
+    border: 2px solid var(--blue-500);
+    outline: none;
+    background: #fff;
+    display: grid;
+    place-content: center;
+}
+.choice[data-type="single"] input { border-radius: 50%; }
+.choice input::after {
+    content: "";
+    width: 12px; height: 12px;
+    border-radius: inherit;
+    transform: scale(0);
+    transition: transform .12s ease;
+    background: var(--blue-600);
+}
+.choice.selected input::after { transform: scale(1); }
+.choice.selected {
+    border-color: var(--blue-500);
+    background: var(--blue-300);
+}
+
+/* Feedback states after answers are submitted */
+.choice.correct {
+    border-color: var(--green-500);
+    background: #eaf8f0;
+    box-shadow: 0 0 0 2px rgba(40,199,111,.18);
+}
+.choice.incorrect {
+    border-color: var(--red-500);
+    background: #ffecef;
+    box-shadow: 0 0 0 2px rgba(255,77,79,.18);
+}
+
+.q-feedback {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #254a6e;
+}
+
+/* Footer and Buttons */
+.quiz-footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btn {
+    appearance: none;
+    border: 1px solid transparent;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    letter-spacing: .2px;
+    cursor: pointer;
+    transition: transform .04s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+    color: #fff;
+    background: var(--blue-500);
+    border-color: var(--blue-600);
+    box-shadow: 0 6px 16px rgba(97,166,215,.35);
+}
+.btn-primary:hover { background: var(--blue-600); }
+
+.btn-ghost {
+    color: var(--blue-800);
+    background: transparent;
+    border-color: var(--blue-300);
+}
+.btn-ghost:hover { background: var(--blue-100); }
+
+/* Score */
+.quiz-result {
+    margin-left: auto;
+    font-weight: 700;
+    color: #0f2f54;
+}
+
+/* Accessibility */
+:where(.btn, .choice):focus-visible {
+    outline: var(--outline);
+    outline-offset: 2px;
+}
+
+/* Small screens */
+@media (max-width: 560px) {
+  .choice { grid-template-columns: 24px 1fr; }
+  .quiz-footer { flex-wrap: wrap; }
+  .quiz-result { width: 100%; margin-left: 0; }
+}
+.quiz-wrapper {
+    background: #ffffff;
+    border: 3px solid var(--blue-700); 
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.btn-success {
+    color: #fff;
+    background: var(--green-500);
+    border-color: #1ea85f;
+    box-shadow: 0 6px 16px rgba(40,199,111,.35);
+}
+.btn-success:hover {
+    background: #1ea85f;
 }

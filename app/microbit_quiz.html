@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Training Platform Robogals</title>
+    <link rel="stylesheet" href="../assets/css/style.css"/>
+    <link rel="icon" type="image/png" href="../assets/images/robogals-logo.png"/>
+    <script defer src="../assets/js/script.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+</head>
+<body class="has-fixed-nav">
+    <!-- Navbar -->
+    <div id="navbar" data-navbar-src="../partials/navbar.html"></div>
+    <div class="nav-links">
+        <a href="microbit_task4.html" class="btn-back">
+            ← Back to Task 4 <span class="note">(You will have to re-watch the training videos to proceed)</span>
+        </a>
+    </div>
+    <main class="quiz-wrapper">
+        <header class="quiz-header">
+            <h1>Robogals Micro:bit Training Quiz</h1>
+            <p class="quiz-sub">Complete all questions to proceed.</p>
+            <div class="quiz-progress" aria-label="Progress">
+            <div class="quiz-progress__bar" id="quizProgressBar"></div>
+            </div>
+        </header>
+
+        <form id="quizForm" class="quiz" novalidate aria-live="polite">
+            <!-- Questions will be injected here by script.js -->
+        </form>
+
+        <footer class="quiz-footer">
+            <button id="submitQuizBtn" type="button" class="btn btn-primary">Submit</button>
+            <button id="retryQuizBtn" type="button" class="btn btn-ghost" hidden>Try Again</button>
+            <a id="finishLessonBtn" 
+                href="https://docs.google.com/forms/d/e/1FAIpQLSceQoQ2anU0R0mh4QI7cMPb8xhfvIN81TICtCnIIwWXgVbr7Q/viewform?usp=header" 
+                class="btn btn-success" 
+                hidden 
+                target="_blank">
+                Finish Lesson
+            </a>
+            <div id="quizResult" class="quiz-result" role="status"></div>
+        </footer>
+        
+    </main>
+</body>
+</html>
