@@ -17,23 +17,23 @@
 
     <section class="training-video">
         <h2>Robogals Microbit Task 1</h2>
-        <!-- Video input -->
-        <video
-            id="trainingVideo"
-            preload="metadata"
-            playsinline
-            disablepictureinpicture
-            oncontextmenu= "return false"
-            tabindex="0"
-        >
-            <source src="../assets/videos/test_file.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <!-- Video Controls -->
-        <div class="video-controls" aria-label="Video controls">
-            <button id="playPauseBtn" type="button" aria-label="Play"> ▶ Play</button>
-            <span id="timeLabel" aria-live="polite">00:00 / 00:00</span>
+
+        <div class="video-wrap">
+            <!-- The player will be created here by JS -->
+            <div id="ytPlayer"></div>
         </div>
+
+        <!-- keep your existing controls/elements -->
+        <div class="video-controls" aria-label="Video controls">
+            <button id="playPauseBtn" type="button" aria-label="Play">▶ Play</button>
+            <span id="timeLabel" aria-live="polite">00:00 / 00:00</span>
+            <button id="fullscreenBtn" type="button" aria-label="Fullscreen">⛶</button>
+        </div>
+
+        <a id="nextBtn" class="btn" href="./microbit_task2.html" style="display:none;">
+            Next → Part 2
+        </a>
+    <section class="training-video">
         <!-- Next Button -->
         <a id="nextBtn" class="btn" href="./microbit_task2.html" style="display:none;">
             Next → Part 2

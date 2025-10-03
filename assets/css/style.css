@@ -202,6 +202,8 @@ body {
     pointer-events: auto;
     margin: 0 auto;
 }
+.training-video .video-wrap { margin: 0 auto; }
+
 .video-controls {
     display: flex;
     align-items: center;
@@ -547,4 +549,144 @@ body.has-fixed-nav .quiz-wrapper {
 }
 .btn-success:hover {
     background: #1ea85f;
+}
+
+/* Normal page layout */
+.video-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+.video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Fullscreen only – let it fill the screen */
+.video-wrap:fullscreen,
+:fullscreen .video-wrap,
+:-webkit-full-screen .video-wrap {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+}
+.video-wrap:fullscreen iframe,
+:fullscreen .video-wrap iframe,
+:-webkit-full-screen .video-wrap iframe {
+    width: 100%;
+    height: 100%;
+}
+
+
+/* === Training video & controls (overrides) === */
+.video-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+.video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Fullscreen fill */
+.video-wrap:fullscreen,
+:fullscreen .video-wrap,
+:-webkit-full-screen .video-wrap {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+}
+.video-wrap:fullscreen iframe,
+:fullscreen .video-wrap iframe,
+:-webkit-full-screen .video-wrap iframe {
+    width: 100%;
+    height: 100%;
+}
+
+/* Bigger, tappable controls */
+.video-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 12px 0;
+}
+.video-controls button {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 16px;
+    min-width: 44px;
+    min-height: 44px;
+    border: 2px solid #111;
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    line-height: 1;
+}
+#fullscreenBtn {
+    font-size: 28px;   /* ⛶ icon size */
+    padding: 10px 12px;
+    width: 56px;
+}
+
+#timeLabel {
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+.video-controls button:hover {
+    box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+}
+.video-controls button:focus-visible {
+    outline: 3px solid #4c9aff;
+    outline-offset: 2px;
+}
+
+.training-video h2,
+.training-video .video-wrap,
+.training-video .video-controls,
+.training-video #nextBtn,
+.training-video .note {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 12px 0 0;
+    padding: 0;
+}
+
+.video-controls button,
+#timeLabel {
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+}
+
+#timeLabel {
+    font-variant-numeric: tabular-nums;
+    padding: 0 8px;
+}
+
+.training-video .video-wrap {
+    margin: 0 auto; 
+}
+
+.training-video .note {
+    max-width: 960px;
+    margin: 8px auto 0;
+    text-align: center;
+    color: #444;
 }

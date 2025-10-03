@@ -316,52 +316,48 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     /* Grading */
     function gradeQuiz() {
-        let correctCount = 0;
+    let correctCount = 0;
 
-        questions.forEach(q => {
-            const card = quizEl.querySelector(`.q-card[data-qid="${q.id}"]`);
-            const choices = [...card.querySelectorAll(".choice")];
-            const selectedIdx = choices
-            .map((c, i) => ({ i, selected: c.classList.contains("selected") }))
-            .filter(o => o.selected)
-            .map(o => o.i);
+    questions.forEach(q => {
+        const card = quizEl.querySelector(`.q-card[data-qid="${q.id}"]`);
+        const choices = [...card.querySelectorAll(".choice")];
 
-            choices.forEach((c, i) => {
-            const isCorrect = !!q.options[i].correct;
-            const isSelected = c.classList.contains("selected");
-            c.classList.remove("correct", "incorrect");
-            if (isSelected && isCorrect) c.classList.add("correct");
-            if (isSelected && !isCorrect) c.classList.add("incorrect");
-            if (!isSelected && isCorrect) c.classList.add("correct");
-            });
+        const selectedIdx = choices
+        .map((c, i) => ({ i, selected: c.classList.contains("selected") }))
+        .filter(o => o.selected)
+        .map(o => o.i);
 
-            const correctIdx = q.options.map((o, i) => (o.correct ? i : -1)).filter(i => i !== -1);
-            const isQCorrect =
-            selectedIdx.length === correctIdx.length &&
-            selectedIdx.every(i => correctIdx.includes(i));
+        const correctIdx = q.options
+        .map((o, i) => (o.correct ? i : -1))
+        .filter(i => i !== -1);
 
-            if (isQCorrect) correctCount += 1;
-
-            //feedback
-            const fb = card.querySelector(`#${q.id}-feedback`);
-            fb.hidden = false;
-            fb.innerHTML = isQCorrect
-            ? `✅ Correct. ${q.feedback || ""}`
-            : `❌ Not quite. ${q.feedback || ""}`;
+        choices.forEach((c, i) => {
+        const isCorrect = !!q.options[i].correct;
+        const isSelected = c.classList.contains("selected");
+        c.classList.remove("correct", "incorrect");
+        if (isSelected && isCorrect) c.classList.add("correct");
+        if (isSelected && !isCorrect) c.classList.add("incorrect");
         });
 
-        const total = questions.length;
-        resultEl.textContent = `Score: ${correctCount} / ${total}`;
-        retryBtn.hidden = false;
+        const isQCorrect =
+        selectedIdx.length === correctIdx.length &&
+        selectedIdx.every(i => correctIdx.includes(i));
 
-        // Show "Finish Lesson" button only if result is 100%
-        const finishBtn = document.getElementById("finishLessonBtn");
-        if (correctCount === total) {
-            finishBtn.hidden = false;
-        } else {
-            finishBtn.hidden = true;
-        }
+        if (isQCorrect) correctCount += 1;
+
+        const fb = card.querySelector(`#${q.id}-feedback`);
+        fb.hidden = false;
+        fb.textContent = isQCorrect ? "✅ Correct." : "❌ Incorrect.";
+    });
+
+    const total = questions.length;
+    resultEl.textContent = `Score: ${correctCount} / ${total}`;
+    retryBtn.hidden = false;
+
+    const finishBtn = document.getElementById("finishLessonBtn");
+    finishBtn.hidden = correctCount !== total;
     }
+
 
     /* Progress bar = proportion of questions with at least one selection */
     function updateProgress() {
@@ -373,7 +369,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (progressBar) progressBar.style.width = `${pct}%`;
     }
 
-    /* Reset the QUiz*/
+    /* Reset the Quiz*/
     function resetQuiz() {
         renderQuiz();
     }
@@ -382,6 +378,111 @@ document.addEventListener("DOMContentLoaded", async () => {
     submitBtn.addEventListener("click", gradeQuiz);
     retryBtn.addEventListener("click", resetQuiz);
 
-    //Initial render
+    // Initial render
     renderQuiz();
+})();
+
+(function ensureYTAPI(){
+    if (window.YT && window.YT.Player) return;
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+})();
+
+(function () {
+    const VIDEO_ID = "w5F2jX5V7U8";
+    const playBtn  = document.getElementById("playPauseBtn");
+    const timeLab  = document.getElementById("timeLabel");
+    const nextBtn  = document.getElementById("nextBtn");
+    const fullscreenBtn = document.getElementById("fullscreenBtn");
+    const playerContainer = document.getElementById("ytPlayer").parentElement;
+
+    fullscreenBtn.addEventListener("click", () => {
+    if (!document.fullscreenElement) {
+        playerContainer.requestFullscreen().catch(err => {
+        console.warn("Fullscreen request failed:", err);
+        });
+    } else {
+        document.exitFullscreen();
+    }
+    });
+
+    const TOL = 0.75; 
+    let player, duration = 0;
+    let maxAllowedTime = 0;
+    let unlocked = false;
+    let pollTimer = null;
+
+    function fmt(s) {
+        s = Math.max(0, Math.floor(s || 0));
+        return `${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`;
+    }
+    function updateLabel(t=0) {
+        timeLab.textContent = `${fmt(t)} / ${fmt(duration||0)}`;
+    }
+    function showNext() {
+        if (!unlocked) {
+        unlocked = true;
+        nextBtn.style.display = "inline-block";
+        }
+    }
+
+    function startPoll() {
+        if (pollTimer) return;
+        pollTimer = setInterval(() => {
+        if (!player) return;
+        const t = player.getCurrentTime() || 0;
+        duration = player.getDuration() || duration || 0;
+        if (t > maxAllowedTime) maxAllowedTime = t;
+        if (duration && (duration - t) <= TOL) showNext();
+        updateLabel(t);
+        }, 300);
+    }
+    function stopPoll() { clearInterval(pollTimer); pollTimer = null; }
+
+    // YouTube API calls this when ready
+    window.onYouTubeIframeAPIReady = function () {
+        player = new YT.Player('ytPlayer', {
+        videoId: VIDEO_ID,
+        playerVars: {
+            controls: 0,         //Hide native controls (no skipping)
+            modestbranding: 1,
+            rel: 0,
+            playsinline: 1,
+            enablejsapi: 1,
+            origin: location.origin
+        },
+        events: {
+            onReady: () => {
+            duration = player.getDuration() || 0;
+            updateLabel(0);
+            },
+            onStateChange: (e) => {
+            if (e.data === YT.PlayerState.PLAYING) {
+                startPoll();
+                playBtn.textContent = "Pause";
+            }
+            if (e.data === YT.PlayerState.PAUSED) {
+                stopPoll();
+                playBtn.textContent = "Play";
+            }
+            if (e.data === YT.PlayerState.ENDED) {
+                stopPoll();
+                showNext();
+            }
+            }
+        }
+        });
+    };
+
+    // Custom Play/Pause
+    playBtn.addEventListener("click", () => {
+        if (!player) return;
+        const state = player.getPlayerState();
+        if (state !== YT.PlayerState.PLAYING) {
+        player.playVideo();
+        } else {
+        player.pauseVideo();
+        }
+    });
 })();
