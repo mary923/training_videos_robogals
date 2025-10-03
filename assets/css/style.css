@@ -690,3 +690,32 @@ body.has-fixed-nav .quiz-wrapper {
     text-align: center;
     color: #444;
 }
+
+.training-video #nextBtn {
+    /* initially hidden via inline style or JS */
+    margin: 16px auto 0;   /* center horizontally */
+    display: none;         /* default hidden */
+    width: fit-content;    /* keeps it snug; optional */
+}
+
+/* Same width as the video, centered */
+.training-video .next-row {
+    max-width: 960px;       /* match .video-wrap max-width */
+    margin: 16px auto 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* Button defaults; will be shown by JS */
+#nextBtn {
+    display: none;
+    padding: 10px 18px;
+    background: #5eaad5;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 12px;
+    text-decoration: none;
+}
+#nextBtn:hover {
+    background: #0b5f89; 
+}

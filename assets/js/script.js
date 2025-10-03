@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             unlocked = true;
         // stop the guard from snapping at the very end
         if (Number.isFinite(video.duration)) maxAllowedTime = video.duration;
-            nextBtn.style.display = "inline-block";
+            nextBtn.style.display = "inline-flex";
     }
     function hideNextAndReset(){
         unlocked = false;
