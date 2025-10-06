@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../assets/css/style.css"/>
     <link rel="icon" type="image/png" href="../assets/images/robogals-logo.png"/>
     <script defer src="../assets/js/script.js"></script>
+    <script defer src="../assets/js/video-config.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -18,28 +19,24 @@
     <section class="training-video">
         <h2>Robogals Microbit Task 1</h2>
 
+        <!-- YOUTUBE PLAYER (no native controls) -->
         <div class="video-wrap">
-            <!-- The player will be created here by JS -->
-            <div id="ytPlayer"></div>
+            <div id="ytPlayer" data-yt-id="w5F2jX5V7U8"></div>
         </div>
 
-        <!-- keep your existing controls/elements -->
+        <!-- Custom controls -->
         <div class="video-controls" aria-label="Video controls">
-            <button id="playPauseBtn" type="button" aria-label="Play">▶ Play</button>
+            <button id="playPauseBtn" type="button" aria-label="Play">Play</button>
             <span id="timeLabel" aria-live="polite">00:00 / 00:00</span>
             <button id="fullscreenBtn" type="button" aria-label="Fullscreen">⛶</button>
         </div>
 
-        <a id="nextBtn" class="btn" href="./microbit_task2.html" style="display:none;">
-            Next → Part 2
-        </a>
-    <section class="training-video">
-        <!-- Next Button -->
-        <a id="nextBtn" class="btn" href="./microbit_task2.html" style="display:none;">
-            Next → Part 2
-        </a>
+        <!-- Next Button (unlocked at end) -->
+        <div class="next-row">
+            <a id="nextBtn" class="btn" href="./microbit_task2.html">Next → Part 2</a>
+        </div>
 
-        <p class="note">You must watch the full video before moving on to part 2. Skipping is disabled.</p>
+        <p class="note">You must watch the full video. Skipping is disabled.</p>
     </section>
     <section class="lesson-notes" aria-labelledby="notes-heading">
         <h3 id="notes-heading">Instructor notes</h3>
